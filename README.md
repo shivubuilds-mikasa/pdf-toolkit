@@ -42,7 +42,7 @@ PDF Toolkit gives you essential PDF tools in one clean app — convert images to
 
 You can download the latest Android APK from the **GitHub Releases** section.
 
-👉 **[Download the latest APK](../../releases/latest)**
+👉 **[Download the latest APK](https://github.com/shivubuilds-mikasa/pdf-toolkit/releases/download/v1.0.0/app-release.apk)**
 
 No account or subscription required.
 
