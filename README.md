@@ -21,7 +21,6 @@ PDF Toolkit gives you essential PDF tools in one clean app — convert images to
 ## 📱 Screenshots
 
 > Screenshots coming soon.
-
 <!-- Add your screenshots here -->
 
 ---
