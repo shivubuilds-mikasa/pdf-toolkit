@@ -29,8 +29,7 @@ PDF Toolkit gives you essential PDF tools in one clean app — convert images to
 ## 🛠️ Tech Stack
 
 * **Flutter**
-* **Dart**
-  
+* **Dart**  
 * **Material 3**
 * Android
 
