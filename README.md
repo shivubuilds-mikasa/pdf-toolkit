@@ -169,22 +169,6 @@ When reporting a bug, please include:
 
 ---
 
-## 🗺️ Roadmap
-
-* [x] Image → PDF
-* [x] PDF Merge
-* [x] PDF Split
-* [x] PDF Compression
-* [x] Material 3 UI
-* [x] Ad-free experience
-* [ ] Improve compression options
-* [ ] More PDF utilities
-* [ ] Better file management
-* [ ] Performance improvements
-* [ ] Automated release builds
-
----
-
 ## ⭐ Support the Project
 
 If you find **PDF Toolkit** useful, consider giving the repository a ⭐ **Star**.
