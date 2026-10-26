@@ -1,0 +1,20 @@
+
+workflows:
+  ios-pdf-toolkit:
+    name: PDF Toolkit - iOS Build
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    environment:
+      flutter: 3.44.9
+      xcode: latest
+    scripts:
+      - name: Check Flutter setup
+        script: flutter --version
+      - name: Get Flutter dependencies
+        script: flutter pub get
+      - name: Build iOS without code signing
+        script: flutter build ios --release --no-codesign
+    artifacts:
+      - build/ios/iphoneos/*.app
+      - build/ios/iphoneos/*.ipa
+      - /tmp/xcodebuild_logs/*.log
