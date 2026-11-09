@@ -2,7 +2,7 @@ name: pdf_toolkit
 description: "A comprehensive offline PDF management utility."
 publish_to: 'none'
 
-version: 1.0.3+4
+version: 1.0.4+5
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -32,6 +32,19 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  web:
+    generate: true
+    image_path: assets/app_icon.png
+    background_color: "#06134E"
+    theme_color: "#06134E"
+  image_path: assets/app_icon.png
+  adaptive_icon_background: "#06134E"
+  adaptive_icon_foreground: assets/app_icon.png
 
 flutter:
   uses-material-design: true

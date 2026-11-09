@@ -62,7 +62,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         onRefresh: _loadStorageSize,
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.fromLTRB(
+            16,
+            16,
+            16,
+            MediaQuery.of(context).padding.bottom + 88,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -149,7 +154,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
-                childAspectRatio: 0.95,
+                childAspectRatio: 1.3,
                 children: [
                   _buildStatCard(
                     context,
@@ -174,7 +179,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
 
               // Quick Actions Grid
               Text(
@@ -189,7 +194,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 12,
-                childAspectRatio: 1.6,
+                childAspectRatio: 1.9,
                 children: [
                   _buildQuickActionCard(
                     context,
@@ -245,7 +250,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 16),
 
               // Recent Activity Section
               Row(

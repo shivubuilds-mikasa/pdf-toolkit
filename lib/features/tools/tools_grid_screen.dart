@@ -75,7 +75,12 @@ class ToolsGridScreen extends StatelessWidget {
         title: Text(local.translate('tools')),
       ),
       body: GridView.builder(
-        padding: const EdgeInsets.all(16.0),
+        padding: EdgeInsets.fromLTRB(
+          16,
+          16,
+          16,
+          MediaQuery.of(context).padding.bottom + 88,
+        ),
         itemCount: tools.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount:
