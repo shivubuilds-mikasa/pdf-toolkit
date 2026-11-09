@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart' as sf;
 import '../../core/localization/localizations.dart';
+import '../../core/widgets/glass_card.dart';
 import '../../core/storage/storage_service.dart';
 import '../../core/utils/file_utils.dart';
 
@@ -147,7 +148,7 @@ class _ImageToPdfScreenState extends ConsumerState<ImageToPdfScreen> {
                 // Top control bar for settings
                 Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Card(
+                  child: GlassCard(
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Column(
@@ -221,7 +222,7 @@ class _ImageToPdfScreenState extends ConsumerState<ImageToPdfScreen> {
                           itemCount: _selectedImages.length,
                           itemBuilder: (context, index) {
                             final file = _selectedImages[index];
-                            return Card(
+                            return GlassCard(
                               key: ValueKey(file.path),
                               margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                               child: ListTile(

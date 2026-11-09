@@ -3,12 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../core/localization/localizations.dart';
+import '../../core/widgets/glass_card.dart';
 import '../../core/storage/storage_service.dart';
 import '../../core/utils/file_utils.dart';
 import 'pdf_viewer_screen.dart';
 
 class FileManagerScreen extends ConsumerStatefulWidget {
-  const FileManagerScreen({super.key});
+  final bool isActive;
+
+  const FileManagerScreen({super.key, this.isActive = true});
 
   @override
   ConsumerState<FileManagerScreen> createState() => _FileManagerScreenState();
@@ -23,6 +26,14 @@ class _FileManagerScreenState extends ConsumerState<FileManagerScreen> {
   bool _showFavoritesOnly = false;
   String _sortBy = 'Date'; // Name, Date, Size
   bool _sortAscending = false;
+
+  @override
+  void didUpdateWidget(covariant FileManagerScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (!oldWidget.isActive && widget.isActive) {
+      _refreshFileList();
+    }
+  }
 
   @override
   void initState() {
@@ -384,7 +395,7 @@ class _FileManagerScreenState extends ConsumerState<FileManagerScreen> {
                             final sizeStr = FileUtils.formatBytes(file.lengthSync());
                             final isFav = storage.isFavorite(file.path);
 
-                            return Card(
+                            return GlassCard(
                               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                               child: ListTile(
                                 leading: CircleAvatar(

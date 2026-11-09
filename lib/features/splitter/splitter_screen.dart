@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart' as sf;
 import '../../core/localization/localizations.dart';
+import '../../core/widgets/glass_card.dart';
 import '../../core/storage/storage_service.dart';
 import '../../core/utils/file_utils.dart';
 
@@ -204,7 +205,7 @@ class _SplitterScreenState extends ConsumerState<SplitterScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // File selector card
-                  Card(
+                  GlassCard(
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
@@ -251,7 +252,7 @@ class _SplitterScreenState extends ConsumerState<SplitterScreen> {
                     const SizedBox(height: 10),
 
                     // Radio list for split type
-                    Card(
+                    GlassCard(
                       child: Column(
                         children: [
                           RadioListTile<String>(
@@ -321,7 +322,7 @@ class _SplitterScreenState extends ConsumerState<SplitterScreen> {
                         ),
                       ),
                     ] else if (_splitType == 'every') ...[
-                      Card(
+                      GlassCard(
                         color: theme.colorScheme.primary.withOpacity(0.05),
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
