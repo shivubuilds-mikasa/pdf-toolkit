@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -37,21 +35,13 @@ class AppTheme {
       scaffoldBackgroundColor: Colors.transparent,
       visualDensity: VisualDensity.standard,
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.transparent,
+        backgroundColor:
+            (isDark ? const Color(0xFF17182D) : const Color(0xFFF8F5FF))
+                .withOpacity(0.54),
         surfaceTintColor: Colors.transparent,
         scrolledUnderElevation: 0,
         elevation: 0,
         centerTitle: false,
-        flexibleSpace: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
-            child: ColoredBox(
-              color:
-                  (isDark ? const Color(0xFF17182D) : const Color(0xFFF8F5FF))
-                      .withOpacity(0.42),
-            ),
-          ),
-        ),
         iconTheme: IconThemeData(color: foreground),
         titleTextStyle: TextStyle(
           fontSize: 21,
