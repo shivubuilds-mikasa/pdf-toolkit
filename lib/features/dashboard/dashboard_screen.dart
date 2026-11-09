@@ -151,10 +151,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               GridView.count(
                 crossAxisCount: 3,
                 shrinkWrap: true,
+                primary: false,
+                padding: EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
-                childAspectRatio: 1.3,
+                childAspectRatio: 0.85,
                 children: [
                   _buildStatCard(
                     context,
@@ -179,7 +181,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 8),
 
               // Quick Actions Grid
               Text(
@@ -191,10 +193,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               GridView.count(
                 crossAxisCount: 2,
                 shrinkWrap: true,
+                primary: false,
+                padding: EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
                 mainAxisSpacing: 12,
                 crossAxisSpacing: 12,
-                childAspectRatio: 1.9,
+                childAspectRatio: 1.55,
                 children: [
                   _buildQuickActionCard(
                     context,
@@ -345,27 +349,30 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     final theme = Theme.of(context);
     return GlassCard(
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(icon, color: color, size: 28),
-            const SizedBox(height: 8),
+            Icon(icon, color: color, size: 24),
+            const SizedBox(height: 4),
             Text(
               val,
-              style: theme.textTheme.headlineMedium?.copyWith(
+              style: theme.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: theme.colorScheme.onSurface,
               ),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 2),
             Text(
               title,
               textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.visible,
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurface.withOpacity(0.6),
-                fontSize: 10,
+                fontSize: 9,
+                height: 1.1,
               ),
             ),
           ],

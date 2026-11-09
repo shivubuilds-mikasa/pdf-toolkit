@@ -386,7 +386,12 @@ class _FileManagerScreenState extends ConsumerState<FileManagerScreen> {
                     : RefreshIndicator(
                         onRefresh: _refreshFileList,
                         child: ListView.builder(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          padding: EdgeInsets.fromLTRB(
+                            0,
+                            8,
+                            0,
+                            MediaQuery.of(context).padding.bottom + 88,
+                          ),
                           itemCount: _filteredFiles.length,
                           itemBuilder: (context, index) {
                             final file = _filteredFiles[index];
