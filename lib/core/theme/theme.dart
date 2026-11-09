@@ -37,7 +37,7 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         backgroundColor:
             (isDark ? const Color(0xFF17182D) : const Color(0xFFF8F5FF))
-                .withOpacity(0.54),
+                .withOpacity(0.18),
         surfaceTintColor: Colors.transparent,
         scrolledUnderElevation: 0,
         elevation: 0,

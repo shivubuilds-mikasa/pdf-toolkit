@@ -31,21 +31,28 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
       );
 
       final documentScanner = DocumentScanner(options: options);
-      final result = await documentScanner.scanDocument();
-      documentScanner.close();
+      late final DocumentScanningResult result;
+      try {
+        result = await documentScanner.scanDocument();
+      } finally {
+        documentScanner.close();
+      }
 
       if (result.images.isNotEmpty) {
-        setState(() {
-          _scannedPages.addAll(result.images.map((path) => File(path)));
-        });
-        _showSnackbar('Added ${result.images.length} scanned page(s).');
+        if (mounted) {
+          setState(() {
+            _scannedPages.addAll(result.images.map((path) => File(path)));
+          });
+        }
       }
     } catch (e) {
       // Graceful fallback to Standard Camera Capture
-      _showSnackbar('ML Kit scanner not available on this device. Opening camera...', isError: true);
+      _showSnackbar(
+          'ML Kit scanner not available on this device. Opening camera...',
+          isError: true);
       await _startCameraFallback();
     } finally {
-      setState(() => _isProcessing = false);
+      if (mounted) setState(() => _isProcessing = false);
     }
   }
 
@@ -53,11 +60,10 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
   Future<void> _startCameraFallback() async {
     try {
       final XFile? image = await _picker.pickImage(source: ImageSource.camera);
-      if (image != null) {
+      if (image != null && mounted) {
         setState(() {
           _scannedPages.add(File(image.path));
         });
-        _showSnackbar('Captured page successfully!');
       }
     } catch (e) {
       _showSnackbar('Error capturing image: $e', isError: true);
@@ -90,7 +96,8 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
         final sf.PdfPage page = document.pages.add();
         page.graphics.drawImage(
           bitmap,
-          Rect.fromLTWH(0, 0, page.getClientSize().width, page.getClientSize().height),
+          Rect.fromLTWH(
+              0, 0, page.getClientSize().width, page.getClientSize().height),
         );
       }
 
@@ -99,24 +106,25 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
 
       // Save PDF in Toolkit folder
       final storage = ref.read(storageServiceProvider);
-      final saveDir = await FileUtils.getSaveDirectory(customPath: storage.customStoragePath);
+      final saveDir = await FileUtils.getSaveDirectory(
+          customPath: storage.customStoragePath);
       final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
       final File pdfFile = File('${saveDir.path}/SCAN_$timestamp.pdf');
       await pdfFile.writeAsBytes(pdfBytes);
 
       // Log statistics
       await storage.incrementCreated();
-      await storage.logActivity('Scanned & created SCAN_$timestamp.pdf with ${_scannedPages.length} pages', 'created');
+      await storage.logActivity(
+          'Scanned & created SCAN_$timestamp.pdf with ${_scannedPages.length} pages',
+          'created');
 
-      _showSnackbar('Scanned document saved successfully!');
-      
       if (mounted) {
         Navigator.pop(context);
       }
     } catch (e) {
       _showSnackbar('Error compiling scanned pages: $e', isError: true);
     } finally {
-      setState(() => _isProcessing = false);
+      if (mounted) setState(() => _isProcessing = false);
     }
   }
 
@@ -146,7 +154,8 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
                 children: [
                   CircularProgressIndicator(),
                   SizedBox(height: 16),
-                  Text('Processing scan items...', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('Processing scan items...',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
             )
@@ -159,19 +168,26 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.document_scanner, size: 64, color: theme.colorScheme.primary.withOpacity(0.3)),
+                              Icon(Icons.document_scanner,
+                                  size: 64,
+                                  color: theme.colorScheme.primary
+                                      .withOpacity(0.3)),
                               const SizedBox(height: 16),
                               const Text(
                                 'No pages scanned yet.',
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 16),
                               ),
                               const SizedBox(height: 8),
                               Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 32),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 32),
                                 child: Text(
                                   'Tap "Scan Page" to launch the smart edge-detecting scanner.',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(color: theme.colorScheme.onSurface.withOpacity(0.5)),
+                                  style: TextStyle(
+                                      color: theme.colorScheme.onSurface
+                                          .withOpacity(0.5)),
                                 ),
                               ),
                             ],
@@ -180,7 +196,8 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
                       : GridView.builder(
                           padding: const EdgeInsets.all(12.0),
                           itemCount: _scannedPages.length,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             mainAxisSpacing: 12,
                             crossAxisSpacing: 12,
@@ -203,14 +220,18 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
                                     left: 8,
                                     top: 8,
                                     child: Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 4),
                                       decoration: BoxDecoration(
                                         color: Colors.black.withOpacity(0.6),
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: Text(
                                         'Page ${index + 1}',
-                                        style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
@@ -219,10 +240,12 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
                                     right: 4,
                                     top: 4,
                                     child: CircleAvatar(
-                                      backgroundColor: Colors.black.withOpacity(0.6),
+                                      backgroundColor:
+                                          Colors.black.withOpacity(0.6),
                                       radius: 16,
                                       child: IconButton(
-                                        icon: const Icon(Icons.close, color: Colors.red, size: 14),
+                                        icon: const Icon(Icons.close,
+                                            color: Colors.red, size: 14),
                                         onPressed: () => _removePage(index),
                                       ),
                                     ),
@@ -255,7 +278,8 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 14),
                           ),
-                          onPressed: _scannedPages.isEmpty ? null : _compileScanToPdf,
+                          onPressed:
+                              _scannedPages.isEmpty ? null : _compileScanToPdf,
                           icon: const Icon(Icons.picture_as_pdf),
                           label: const Text('Compile PDF'),
                         ),

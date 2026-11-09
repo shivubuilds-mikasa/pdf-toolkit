@@ -30,7 +30,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   Future<void> _loadStorageSize() async {
     setState(() => _isLoadingStorage = true);
     final storage = ref.read(storageServiceProvider);
-    final size = await FileUtils.getStorageUsed(customPath: storage.customStoragePath);
+    final size =
+        await FileUtils.getStorageUsed(customPath: storage.customStoragePath);
     if (mounted) {
       setState(() {
         _storageUsed = size;
@@ -92,7 +93,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                               value: 0.65, // Demonstrative target percent
                               strokeWidth: 8,
                               color: theme.colorScheme.primary,
-                              backgroundColor: theme.colorScheme.onSurface.withOpacity(0.1),
+                              backgroundColor:
+                                  theme.colorScheme.onSurface.withOpacity(0.1),
                             ),
                           ),
                           const Icon(Icons.storage, size: 30),
@@ -105,18 +107,21 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                           children: [
                             Text(
                               local.translate('storage_used'),
-                              style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                              style: theme.textTheme.titleMedium
+                                  ?.copyWith(fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(height: 6),
                             _isLoadingStorage
                                 ? const SizedBox(
                                     height: 20,
                                     width: 20,
-                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                    child: CircularProgressIndicator(
+                                        strokeWidth: 2),
                                   )
                                 : Text(
                                     FileUtils.formatBytes(_storageUsed),
-                                    style: theme.textTheme.headlineSmall?.copyWith(
+                                    style:
+                                        theme.textTheme.headlineSmall?.copyWith(
                                       color: theme.colorScheme.primary,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -124,7 +129,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                             const SizedBox(height: 4),
                             Text(
                               'In PDF Toolkit Folder',
-                              style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.6)),
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                  color: theme.colorScheme.onSurface
+                                      .withOpacity(0.6)),
                             ),
                           ],
                         ),
@@ -172,7 +179,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               // Quick Actions Grid
               Text(
                 local.translate('quick_actions'),
-                style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: theme.textTheme.titleLarge
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 12),
               GridView.count(
@@ -188,28 +196,52 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     local.translate('image_to_pdf'),
                     Icons.image,
                     theme.colorScheme.primary,
-                    () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ImageToPdfScreen())),
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            BackdropGroup(child: const ImageToPdfScreen()),
+                      ),
+                    ),
                   ),
                   _buildQuickActionCard(
                     context,
                     local.translate('merge_pdf'),
                     Icons.merge_type,
                     theme.colorScheme.secondary,
-                    () => Navigator.push(context, MaterialPageRoute(builder: (_) => const MergerScreen())),
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            BackdropGroup(child: const MergerScreen()),
+                      ),
+                    ),
                   ),
                   _buildQuickActionCard(
                     context,
                     local.translate('compress_pdf'),
                     Icons.compress,
                     theme.colorScheme.error,
-                    () => Navigator.push(context, MaterialPageRoute(builder: (_) => const CompressorScreen())),
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            BackdropGroup(child: const CompressorScreen()),
+                      ),
+                    ),
                   ),
                   _buildQuickActionCard(
                     context,
                     local.translate('doc_scanner'),
                     Icons.document_scanner,
                     Colors.orange,
-                    () => Navigator.push(context, MaterialPageRoute(builder: (_) => const ScannerScreen())),
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            BackdropGroup(child: const ScannerScreen()),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -221,7 +253,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 children: [
                   Text(
                     local.translate('recent_activity'),
-                    style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.titleLarge
+                        ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   if (activities.isNotEmpty)
                     IconButton(
@@ -237,11 +270,16 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 30),
                         child: Column(
                           children: [
-                            Icon(Icons.history, size: 40, color: theme.colorScheme.onSurface.withOpacity(0.3)),
+                            Icon(Icons.history,
+                                size: 40,
+                                color: theme.colorScheme.onSurface
+                                    .withOpacity(0.3)),
                             const SizedBox(height: 8),
                             Text(
                               local.translate('no_recent_activity'),
-                              style: TextStyle(color: theme.colorScheme.onSurface.withOpacity(0.5)),
+                              style: TextStyle(
+                                  color: theme.colorScheme.onSurface
+                                      .withOpacity(0.5)),
                             ),
                           ],
                         ),
@@ -297,7 +335,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  Widget _buildStatCard(BuildContext context, String title, String val, IconData icon, Color color) {
+  Widget _buildStatCard(BuildContext context, String title, String val,
+      IconData icon, Color color) {
     final theme = Theme.of(context);
     return GlassCard(
       child: Padding(
@@ -330,7 +369,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     );
   }
 
-  Widget _buildQuickActionCard(BuildContext context, String label, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildQuickActionCard(BuildContext context, String label,
+      IconData icon, Color color, VoidCallback onTap) {
     final theme = Theme.of(context);
     return GlassCard(
       clipBehavior: Clip.antiAlias,
@@ -348,7 +388,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
               Text(
                 label,
-                style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                style: theme.textTheme.titleMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
             ],
           ),

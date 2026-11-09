@@ -78,7 +78,8 @@ class ToolsGridScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         itemCount: tools.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 1, // Single column with modern wide lists is extremely readable
+          crossAxisCount:
+              1, // Single column with modern wide lists is extremely readable
           mainAxisSpacing: 12,
           crossAxisSpacing: 12,
           childAspectRatio: 3.5,
@@ -91,17 +92,24 @@ class ToolsGridScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => tool['screen'] as Widget),
+                  MaterialPageRoute(
+                    builder: (_) => BackdropGroup(
+                      child: tool['screen'] as Widget,
+                    ),
+                  ),
                 );
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 12.0),
                 child: Row(
                   children: [
                     CircleAvatar(
                       radius: 28,
-                      backgroundColor: (tool['color'] as Color).withOpacity(0.15),
-                      child: Icon(tool['icon'] as IconData, color: tool['color'] as Color, size: 28),
+                      backgroundColor:
+                          (tool['color'] as Color).withOpacity(0.15),
+                      child: Icon(tool['icon'] as IconData,
+                          color: tool['color'] as Color, size: 28),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
@@ -121,7 +129,8 @@ class ToolsGridScreen extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: theme.textTheme.bodySmall?.copyWith(
-                              color: theme.colorScheme.onSurface.withOpacity(0.6),
+                              color:
+                                  theme.colorScheme.onSurface.withOpacity(0.6),
                             ),
                           ),
                         ],

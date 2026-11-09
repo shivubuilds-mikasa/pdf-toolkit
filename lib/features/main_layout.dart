@@ -56,14 +56,16 @@ class _MainLayoutState extends ConsumerState<MainLayout> {
                   ],
           ),
         ),
-        child: IndexedStack(
-          index: _currentIndex,
-          children: [
-            const DashboardScreen(),
-            const ToolsGridScreen(),
-            FileManagerScreen(isActive: _currentIndex == 2),
-            const SettingsScreen(),
-          ],
+        child: BackdropGroup(
+          child: IndexedStack(
+            index: _currentIndex,
+            children: [
+              const DashboardScreen(),
+              const ToolsGridScreen(),
+              FileManagerScreen(isActive: _currentIndex == 2),
+              const SettingsScreen(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: SafeArea(
@@ -72,22 +74,15 @@ class _MainLayoutState extends ConsumerState<MainLayout> {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(30),
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
+            filter: ImageFilter.blur(sigmaX: 9, sigmaY: 9),
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
               decoration: BoxDecoration(
                 color: (isDark ? const Color(0xFF292B42) : Colors.white)
-                    .withOpacity(isDark ? 0.68 : 0.70),
+                    .withOpacity(isDark ? 0.14 : 0.12),
                 borderRadius: BorderRadius.circular(30),
                 border: Border.all(
-                    color: Colors.white.withOpacity(isDark ? 0.24 : 0.90)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(isDark ? 0.30 : 0.12),
-                    blurRadius: 28,
-                    offset: const Offset(0, 10),
-                  ),
-                ],
+                    color: Colors.white.withOpacity(isDark ? 0.24 : 0.52)),
               ),
               child: Row(
                 children: List.generate(labels.length, (index) {
@@ -103,13 +98,13 @@ class _MainLayoutState extends ConsumerState<MainLayout> {
                           borderRadius: BorderRadius.circular(24),
                           onTap: () => setState(() => _currentIndex = index),
                           child: AnimatedContainer(
-                            duration: const Duration(milliseconds: 220),
+                            duration: const Duration(milliseconds: 160),
                             curve: Curves.easeOutCubic,
                             height: 48,
                             margin: const EdgeInsets.symmetric(horizontal: 3),
                             decoration: BoxDecoration(
                               color: selected
-                                  ? primary.withOpacity(isDark ? 0.24 : 0.14)
+                                  ? primary.withOpacity(isDark ? 0.15 : 0.08)
                                   : Colors.transparent,
                               borderRadius: BorderRadius.circular(24),
                               border: selected
