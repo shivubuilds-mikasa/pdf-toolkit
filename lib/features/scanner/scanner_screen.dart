@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:google_mlkit_document_scanner/google_mlkit_document_scanner.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart' as sf;
 import '../../core/localization/localizations.dart';
+import '../../core/widgets/glass_card.dart';
 import '../../core/storage/storage_service.dart';
 import '../../core/utils/file_utils.dart';
 
@@ -187,7 +188,7 @@ class _ScannerScreenState extends ConsumerState<ScannerScreen> {
                           ),
                           itemBuilder: (context, index) {
                             final file = _scannedPages[index];
-                            return Card(
+                            return GlassCard(
                               clipBehavior: Clip.antiAlias,
                               child: Stack(
                                 children: [

@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../../core/localization/localizations.dart';
+import '../../core/widgets/glass_card.dart';
 import '../../core/storage/storage_service.dart';
 import '../../core/utils/file_utils.dart';
 
@@ -159,7 +160,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         padding: const EdgeInsets.all(16.0),
         children: [
           // Theme Switch Card
-          Card(
+          GlassCard(
             child: SwitchListTile(
               title: Text(local.translate('dark_mode')),
               subtitle: const Text('Toggle dark theme aesthetics'),
@@ -173,7 +174,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           const SizedBox(height: 12),
 
           // Language Card
-          Card(
+          GlassCard(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Row(
@@ -216,7 +217,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           const SizedBox(height: 12),
 
           // Custom Storage Path Card
-          Card(
+          GlassCard(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -267,7 +268,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           const Text('Preference Operations', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
           const SizedBox(height: 10),
 
-          Card(
+          GlassCard(
             child: Column(
               children: [
                 ListTile(

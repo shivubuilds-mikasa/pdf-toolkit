@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart' as sf;
 import '../../core/localization/localizations.dart';
+import '../../core/widgets/glass_card.dart';
 import '../../core/storage/storage_service.dart';
 import '../../core/utils/file_utils.dart';
 
@@ -150,7 +151,7 @@ class _CompressorScreenState extends ConsumerState<CompressorScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // File Select Card
-                  Card(
+                  GlassCard(
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
@@ -197,7 +198,7 @@ class _CompressorScreenState extends ConsumerState<CompressorScreen> {
                       ),
                       const SizedBox(height: 10),
 
-                      Card(
+                      GlassCard(
                         child: Column(
                           children: [
                             RadioListTile<String>(
@@ -242,7 +243,7 @@ class _CompressorScreenState extends ConsumerState<CompressorScreen> {
                       ),
                     ] else ...[
                       // Finished Scorecard
-                      Card(
+                      GlassCard(
                         color: theme.colorScheme.secondary.withOpacity(0.1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/localization/localizations.dart';
+import '../../core/widgets/glass_card.dart';
 import '../image_to_pdf/image_to_pdf_screen.dart';
 import '../merger/merger_screen.dart';
 import '../splitter/splitter_screen.dart';
@@ -84,7 +85,7 @@ class ToolsGridScreen extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           final tool = tools[index];
-          return Card(
+          return GlassCard(
             clipBehavior: Clip.antiAlias,
             child: InkWell(
               onTap: () {

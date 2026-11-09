@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/localization/localizations.dart';
@@ -16,57 +18,144 @@ class MainLayout extends ConsumerStatefulWidget {
 class _MainLayoutState extends ConsumerState<MainLayout> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [
-    const DashboardScreen(),
-    const ToolsGridScreen(),
-    const FileManagerScreen(),
-    const SettingsScreen(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     final local = AppLocalizations.of(context);
-    final theme = Theme.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final primary = Theme.of(context).colorScheme.primary;
+    final labels = [
+      local.translate('dashboard'),
+      local.translate('tools'),
+      local.translate('saved_files'),
+      local.translate('settings'),
+    ];
+    final icons = [
+      (Icons.dashboard_outlined, Icons.dashboard_rounded),
+      (Icons.grid_view_rounded, Icons.grid_view_rounded),
+      (Icons.folder_open_outlined, Icons.folder_rounded),
+      (Icons.settings_outlined, Icons.settings_rounded),
+    ];
 
     return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _screens,
+      extendBody: true,
+      body: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: isDark
+                ? const [
+                    Color(0xFF111326),
+                    Color(0xFF1C2140),
+                    Color(0xFF101E2A)
+                  ]
+                : const [
+                    Color(0xFFF5F0FF),
+                    Color(0xFFE9F2FF),
+                    Color(0xFFFFF3F8)
+                  ],
+          ),
+        ),
+        child: IndexedStack(
+          index: _currentIndex,
+          children: [
+            const DashboardScreen(),
+            const ToolsGridScreen(),
+            FileManagerScreen(isActive: _currentIndex == 2),
+            const SettingsScreen(),
+          ],
+        ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.dashboard_outlined),
-            activeIcon: const Icon(Icons.dashboard),
-            label: local.translate('dashboard'),
+      bottomNavigationBar: SafeArea(
+        top: false,
+        minimum: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 7),
+              decoration: BoxDecoration(
+                color: (isDark ? const Color(0xFF292B42) : Colors.white)
+                    .withOpacity(isDark ? 0.68 : 0.70),
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                    color: Colors.white.withOpacity(isDark ? 0.24 : 0.90)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(isDark ? 0.30 : 0.12),
+                    blurRadius: 28,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: List.generate(labels.length, (index) {
+                  final selected = index == _currentIndex;
+                  return Expanded(
+                    child: Semantics(
+                      button: true,
+                      selected: selected,
+                      label: labels[index],
+                      child: Tooltip(
+                        message: labels[index],
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(24),
+                          onTap: () => setState(() => _currentIndex = index),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 220),
+                            curve: Curves.easeOutCubic,
+                            height: 48,
+                            margin: const EdgeInsets.symmetric(horizontal: 3),
+                            decoration: BoxDecoration(
+                              color: selected
+                                  ? primary.withOpacity(isDark ? 0.24 : 0.14)
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(24),
+                              border: selected
+                                  ? Border.all(color: primary.withOpacity(0.16))
+                                  : null,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  selected ? icons[index].$2 : icons[index].$1,
+                                  size: 22,
+                                  color: selected
+                                      ? primary
+                                      : Theme.of(context)
+                                          .colorScheme
+                                          .onSurface
+                                          .withOpacity(0.68),
+                                ),
+                                if (selected) ...[
+                                  const SizedBox(width: 7),
+                                  Flexible(
+                                    child: Text(
+                                      labels[index],
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: primary,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 11,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.build_outlined),
-            activeIcon: const Icon(Icons.build),
-            label: local.translate('tools'),
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.folder_open_outlined),
-            activeIcon: const Icon(Icons.folder),
-            label: local.translate('saved_files'),
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.settings_outlined),
-            activeIcon: const Icon(Icons.settings),
-            label: local.translate('settings'),
-          ),
-        ],
-        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-        unselectedLabelStyle: const TextStyle(fontSize: 12),
-        backgroundColor: theme.colorScheme.surface,
-        selectedItemColor: theme.colorScheme.primary,
-        unselectedItemColor: theme.colorScheme.onSurface.withOpacity(0.6),
+        ),
       ),
     );
   }

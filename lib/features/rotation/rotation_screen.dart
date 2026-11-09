@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart' as sf;
 import '../../core/localization/localizations.dart';
+import '../../core/widgets/glass_card.dart';
 import '../../core/storage/storage_service.dart';
 import '../../core/utils/file_utils.dart';
 
@@ -192,7 +193,7 @@ class _RotationScreenState extends ConsumerState<RotationScreen> {
                 // Top PDF selector card
                 Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Card(
+                  child: GlassCard(
                     child: Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Column(
@@ -254,7 +255,7 @@ class _RotationScreenState extends ConsumerState<RotationScreen> {
 
                             return GestureDetector(
                               onTap: () => _toggleSelectPage(index),
-                              child: Card(
+                              child: GlassCard(
                                 color: isSelected
                                     ? theme.colorScheme.primary.withOpacity(0.15)
                                     : theme.colorScheme.surface,

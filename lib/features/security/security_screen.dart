@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart' as sf;
 import '../../core/localization/localizations.dart';
+import '../../core/widgets/glass_card.dart';
 import '../../core/storage/storage_service.dart';
 import '../../core/utils/file_utils.dart';
 
@@ -232,7 +233,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> with SingleTick
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Card(
+                      GlassCard(
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
@@ -310,7 +311,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> with SingleTick
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      Card(
+                      GlassCard(
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
