@@ -1,188 +1,121 @@
-# 📄 PDF Toolkit
-A simple, fast, and **ad-free Android PDF utility app** built with Flutter.
-PDF Toolkit gives you essential PDF tools in one clean app — convert images to PDFs, merge multiple PDFs, split documents, and compress files without unnecessary ads or clutter.
+<p align="center">
+  <img src="assets/app_icon.png" alt="PDF Toolkit app icon" width="112" />
+</p>
 
----
+<h1 align="center">PDF Toolkit</h1>
 
-## ✨ Features
+<p align="center">
+  A clean, on-device workspace for the PDF tasks you do every day.
+</p>
 
-| Feature              | Description                                       |
-| -------------------- | ------------------------------------------------- |
-| 🖼️ **Image to PDF** | Convert one or multiple images into a PDF         |
-| 🔗 **Merge PDF**     | Combine multiple PDF files into a single document |
-| ✂️ **Split PDF**     | Extract selected pages from a PDF                 |
-| 📦 **Compress PDF**  | Reduce PDF file size                              |
-| 📱 **Android App**   | Designed specifically for Android                 |
-| 🚫 **No Ads**        | No annoying advertisements                        |
-| 🎨 **Material 3 UI** | Clean and modern interface                        |
+<p align="center">
+  <a href="https://github.com/shivubuilds-mikasa/pdf-toolkit/releases/latest">
+    <img src="https://img.shields.io/github/v/release/shivubuilds-mikasa/pdf-toolkit?label=latest%20release&color=8b7bff" alt="Latest release" />
+  </a>
+  <img src="https://img.shields.io/badge/Flutter-3.44.9-02569B?logo=flutter&logoColor=white" alt="Built with Flutter" />
+  <img src="https://img.shields.io/badge/platform-Android-3DDC84?logo=android&logoColor=white" alt="Android app" />
+  <img src="https://img.shields.io/badge/ads-none-18a999" alt="No ads" />
+</p>
 
----
+<p align="center">
+  <a href="https://github.com/shivubuilds-mikasa/pdf-toolkit/releases/latest/download/app-release.apk"><strong>⬇ Download the latest APK</strong></a>
+  &nbsp; · &nbsp;
+  <a href="https://github.com/shivubuilds-mikasa/pdf-toolkit/releases">All releases</a>
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/app-tour.gif" alt="Animated tour: dashboard, saved PDFs, and the PDF reader" width="270" />
+</p>
+
+## Your PDFs, one place
+
+Convert, organize, and work with PDFs from a single app. The interface keeps your tools close, your recent work easy to find, and your saved documents accessible all the way to the bottom of the list.
+
+## ✨ What you can do
+
+| Tool | What it does |
+| --- | --- |
+| 🖼️ **Image to PDF** | Turn one or more images into a PDF. |
+| 📷 **Document Scanner** | Capture paper documents with your camera and save them as PDFs. |
+| 🔗 **PDF Merger** | Combine multiple PDFs into one file. |
+| ✂️ **PDF Splitter** | Extract page ranges or split a document into separate pages. |
+| 📦 **PDF Compressor** | Reduce file size with adjustable compression. |
+| 🔄 **Page Rotation** | Rotate selected pages or an entire document. |
+| 🔐 **Password Protect** | Add or remove PDF passwords. |
+| 📁 **Saved Files** | Search, sort, favorite, rename, share, and open your PDFs. |
 
 ## 📱 Screenshots
 
-> Screenshots coming soon.
-> 
+<table>
+  <tr>
+    <th align="center">Dashboard</th>
+    <th align="center">Saved files</th>
+    <th align="center">PDF reader</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/screenshots/dashboard.png" alt="Dashboard showing storage, totals, and quick actions" width="240" /></td>
+    <td align="center"><img src="docs/screenshots/saved-files-bottom.png" alt="Saved files list with the last PDF above the navigation bar" width="240" /></td>
+    <td align="center"><img src="docs/screenshots/last-pdf-opened.png" alt="The last PDF opened in the reader" width="240" /></td>
+  </tr>
+</table>
 
----
+The animated tour above cycles through these screens with a soft crossfade.
 
-## 🛠️ Tech Stack
+## 📦 Install
 
-* **Flutter**
-* **Dart**  
-* **Material 3**
-* Android
+Download **PDF Toolkit v1.0.5** from the latest GitHub release:
 
----
+<p align="center">
+  <a href="https://github.com/shivubuilds-mikasa/pdf-toolkit/releases/latest/download/app-release.apk">
+    <img src="https://img.shields.io/badge/Download-Android%20APK-6f5bff?style=for-the-badge&logo=android&logoColor=white" alt="Download Android APK" />
+  </a>
+</p>
 
-## 📥 Download
+Open the downloaded APK on your Android device and follow Android’s install prompt. The release page also contains previous versions and release notes.
 
-You can download the latest Android APK from the **GitHub Releases** section.
+## 🧑‍💻 Run from source
 
-👉 **[Download the latest APK](https://github.com/shivubuilds-mikasa/pdf-toolkit/releases/download/v1.0.0/app-release.apk)**
+### Requirements
 
-No account or subscription required.
+- Flutter SDK
+- Android Studio or Android SDK
+- An Android device or emulator
 
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-Make sure you have:
-
-* Flutter SDK
-* Dart SDK
-* Android Studio or Android SDK
-* Git
-
-### Clone the repository
+### Start the app
 
 ```bash
 git clone https://github.com/shivubuilds-mikasa/pdf-toolkit.git
 cd pdf-toolkit
-```
-
-### Install dependencies
-
-```bash
 flutter pub get
-```
-
-### Run the app
-
-Connect an Android device or start an emulator and run:
-
-```bash
 flutter run
 ```
 
----
-
-## 🏗️ Build APK
-
-To create a release APK:
+### Build a release APK
 
 ```bash
 flutter build apk --release
 ```
 
-The generated APK can be found inside:
+The APK is written to `build/app/outputs/flutter-apk/app-release.apk`.
 
-```text
-build/app/outputs/flutter-apk/release/
-```
+## 🧱 Built with
 
----
+- **Flutter & Dart** for the app and interface
+- **Material 3** components with a glass-inspired theme
+- **Riverpod** for app state
+- Native Android document scanning and local file storage
 
-## 📂 Project Structure
+## 🔒 Your documents
 
-```text
-pdf-toolkit/
-│
-├── android/
-├── assets/
-├── lib/
-│   ├── screens/
-│   ├── widgets/
-│   └── ...
-│
-├── test/
-├── pubspec.yaml
-├── README.md
-└── ...
-```
-
----
-
-## 🔐 Privacy
-
-PDF Toolkit is designed to keep document processing simple and private.
-
-Your files are processed by the application for the requested operation and are not uploaded to a third-party server as part of the normal app workflow.
-
-> Always review the current app implementation before relying on this statement for sensitive documents.
-
----
+PDF Toolkit is built around local document workflows. Camera access is used by the document scanner; your PDFs remain in the app’s chosen storage location so you can manage them from Saved Files.
 
 ## 🤝 Contributing
 
-Contributions are welcome!
-
-If you'd like to improve PDF Toolkit:
-
-1. Fork the repository.
-2. Create a new branch.
-
-```bash
-git checkout -b feature/your-feature
-```
-
-3. Make your changes.
-4. Commit your changes.
-
-```bash
-git add .
-git commit -m "feat: add your feature"
-```
-
-5. Push your branch.
-
-```bash
-git push origin feature/your-feature
-```
-
-6. Open a Pull Request.
+Bug reports and improvements are welcome. When opening an issue, include your device and Android version, steps to reproduce, and what you expected to happen.
 
 ---
 
-## 🐛 Found a Bug?
-
-If you find a bug or have an idea for improving PDF Toolkit, feel free to open an **Issue**.
-
-When reporting a bug, please include:
-
-* Device / Android version
-* Steps to reproduce
-* Expected behavior
-* Actual behavior
-* Screenshots or logs if available
-
----
-
-## ⭐ Support the Project
-
-If you find **PDF Toolkit** useful, consider giving the repository a ⭐ **Star**.
-
-It helps the project get more visibility and motivates further development.
-
----
-
-## 📄 License
-
-This project is open source. See the repository's license file for details.
-
----
-
-### Built with ❤️ using Flutter
-
-**PDF Toolkit — Simple PDF tools, without the clutter.**
+<p align="center">
+  <strong>PDF Toolkit</strong><br />
+  Make PDFs. Keep moving.
+</p>
