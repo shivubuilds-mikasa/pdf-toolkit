@@ -7,14 +7,18 @@ workflows:
     environment:
       flutter: 3.44.9
       xcode: latest
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.pdftoolkit.app.pdfToolkit
     scripts:
       - name: Check Flutter setup
         script: flutter --version
       - name: Get Flutter dependencies
         script: flutter pub get
-      - name: Build iOS without code signing
-        script: flutter build ios --release --no-codesign
+      - name: Apply iOS signing profiles
+        script: xcode-project use-profiles
+      - name: Build signed iOS IPA
+        script: flutter build ipa --release
     artifacts:
-      - build/ios/iphoneos/*.app
-      - build/ios/iphoneos/*.ipa
+      - build/ios/ipa/*.ipa
       - /tmp/xcodebuild_logs/*.log
