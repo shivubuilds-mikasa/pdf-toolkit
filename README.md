@@ -38,7 +38,6 @@ Convert, organize, and work with PDFs from a single app. The interface keeps you
 | 🖼️ **Image to PDF** | Turn one or more images into a PDF. |
 | 📷 **Document Scanner** | Capture paper documents with your camera and save them as PDFs. |
 | 🔗 **PDF Merger** | Combine multiple PDFs into one file. |
-
 | ✂️ **PDF Splitter** | Extract page ranges or split a document into separate pages. |
 
 | 📦 **PDF Compressor** | Reduce file size with adjustable compression. |
