@@ -1,6 +1,5 @@
 <p align="center">
   <img src="assets/app_icon.png" alt="PDF Toolkit app icon" width="112" />
-
 </p>
 
 <h1 align="center">PDF Toolkit</h1>
