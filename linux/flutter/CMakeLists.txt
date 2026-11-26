@@ -13,6 +13,7 @@ include(${EPHEMERAL_DIR}/generated_config.cmake)
 # which isn't available in 3.10.
 function(list_prepend LIST_NAME PREFIX)
     set(NEW_LIST "")
+    
     foreach(element ${${LIST_NAME}})
         list(APPEND NEW_LIST "${PREFIX}${element}")
     endforeach(element)
